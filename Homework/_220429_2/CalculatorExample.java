@@ -23,7 +23,7 @@ public class CalculatorExample {
 			case "i":
 //				try {
 				System.out.println("입력 값>>");
-				double num = sc.nextDouble();
+				double num = sc.nextDouble(); // sc.nextDouble();로 하지말고 Integer.parseInt(sc.next());로 하니 아래 문제 해결 됨, ""까지 같이 읽어서 default값도 출력한 듯
 				cal.setInputNum(num);
 //				} catch(InputMismatchException e) {
 //					System.out.println("숫자만 입력 가능합니다.");
