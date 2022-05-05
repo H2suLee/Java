@@ -1,0 +1,62 @@
+ Chapter 11_기본 API 클래스
+ 
+ >> Object 클래스: 모든 클래스의 최상위 부모 클래스. 모든 클래스에서 Object의 메소드(equals 등)를 사용할 수 있다.
+ 
+	 >> 객체 비교 equals()
+	 	public boolean equals(Object obj){   }
+	 	 - 모든 객체가 obj 자리에 대입될 수 있다 (다형성, 자동 타입 변환)
+	 	 - 두 객체가 동일한 객체면(논리적으로 동등하면) true, 아니면 false를 리턴
+	 	 - 논리적으로 동등하다는 말은 객체가 저장하고 있는 데이터가 동일하다는 뜻
+	 	 - 일반적으로 Object의 메소드는 하위 클래스에서 재정의되어 사용됨 ex) String에서 equals() 메소드는 번지가 아니라 문자열이 동일한 지 조사함 (메소드 재정의)
+	 	 - equals 메소드를 재정의할 때는 instanceof 연산자 꼭 사용해 주기 ex) obj instanceof Member
+ 
+	 >> 객체 해쉬코드 hashCode()
+ 		- 객체 해쉬코드란, 객체를 식별하는 하나의 정수값, 객체마다 다른 값을 가지고 있음
+ 		- 해쉬코드 값이 다르면 다른 객체, 해쉬코드 값이 같은면 equals메소드로 다시 비교, 
+ 		- equals의 리턴값이 다르면 해쉬코드가 같아도 다른 객체, equals 리턴값과 해쉬코드가 모두 같아야만 같은 객체
+ 		- 결론적으로 객체의 동등 비교를 위해서는 equals, hashcode 둘다 재정의해야 함
+ 		- ★예제 p475~476 보강해야 됨 (아직 이해 못함)
+ 		
+	 >> 객체 문자 정보 toString()
+	 	- 기본적으로 '클래스이름@16진수해시코드'로 구성된 문자 정보를 리턴함
+	 	- 그러나 이 정보는 자바에선 크게 쓸모있는 정보가 아니므로, Object의 하위 클래스는 toString 메소드를 재정의해서 사용하곤 함
+	 	- 예를 들어 Date 클래스는 현재 시스템의 날짜와 시간 정보를 리턴
+	 	- String 클래스는 저장하고 있는 문자열을 리턴
+
+ >> System 클래스
+ 	- System 클래스의 모든 필드와 메소드는 정적 필드와 정적 메소드로 구성되어 있다.
+ 	>> 프로그램 종료 exit()	 	
+ 		- int 매개값을 지정하도록 되어 있다. 일반적으로 정상 종료일 경우 0을 준다. ex) System.exit(0);
+ 		- 강제 종료 기능
+ 	>> 현재 시각 읽기 currentTimeMills()(밀리 세컨드 리턴), nanoTime()(나노 세컨드 리턴)
+ 		- long 값 리턴
+ 		- 프로그램 실행 소요 시간 측정에 주로 사용. 프로그램 시작 시 시각을 읽고, 프로그램이 끝날 때 시각을 읽어 그 차이를 구하면 됨.
+ 
+ >> Class 클래스
+ 	>> Class 객체 얻기 getClass(), forName()
+ 	>> 프로그램에서 Class 객체를 얻기 위해 세 가지 방법이 있다.
+ 		- Class clazz = 클래스이름.class
+ 		- Class clazz = Class.forName("클래스 이름")
+ 		- Class clazz = 참조변수.getClass();
+ 	>> 클래스 경로를 활용해서 리소스 절대 경로 얻기 getResource("파일명").getPath()
+ 		- UI 프로그램에서 사용	 			
+ >> String 클래스
+ 	>> String 생성자 - 바이트 배열을 문자열로 변환 
+ 		- String str = new String(byte[] bytes); // 배열 전체를 String 객체로 생성
+ 		- String str = new String(byte[] bytes, String charsetName) // 지정한 문자셋으로 디코딩
+ 		- String str = new String(byte[] bytes, int offset, int length) // offset 인덱스 위치부터 length만큼 String 객체로 생성
+ 		- String str = new String(byte[] bytes, int offset, int length, String charsetName) // 지정한 문자셋으로 디코딩
+ 	>> String 메소드 
+ 		- charAt(int) 특정 위치의 문자 리턴 (char)
+ 		- equals(object) 두 문자열 비교 (boolean)
+ 		- getByte() byte[]로 리턴 (byte[])
+ 		- getBytes(charset) 주어진 문자셋으로 인코딩한 byte[]로 리턴 (byte[])
+ 		- indexOf(str) 문자열 내에 주어진 문자열의 위치 (int)
+ 		- length() 문자열의 길이 (int)
+ 		- replace(target, replacement) target 부분을 replacement로 대치한 새로운 문자열을 리턴 (String)
+ 		- substring(begin-index) 시작 위치에서 끝까지 잘라낸 새로운 문자열을 리턴 (String)
+ 		- substring(begin-index, end-index) 시작 위치부터 끝 위치까지 잘라낸 새로운 문자열 리턴 (String)
+ 		- toLowerCase() 알파벳 소문자로 변환한 새로운 문자열 리턴 (String)
+ 		- toUpperCase() 알파벳 대문자로 변환한 새로운 문자열 리턴 (String)
+ 		- trim() 앞뒤 공백 제거한 새로운 문자열 리턴 (String)
+ 		- valueOf(기본타입) 기본 타입 값을 문자열로 리턴 (String)
