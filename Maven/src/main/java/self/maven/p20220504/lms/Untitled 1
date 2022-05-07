@@ -1,0 +1,11 @@
+ Menu - App에서 directly referred
+ 
+ // DAO 
+ StudentService - Menu에서 directly referred, 
+ - 데이터베이스의 data에 직접 접근하기 위한 객체
+ 
+ // DTO or VO
+ StudentVO - StudentService에서 directly referred
+ - 계층 간 data를 교환하기 위한 객체
+ - 로직을 가지지 않으며 필드와 게터 세터만 갖고 있음
+ 
