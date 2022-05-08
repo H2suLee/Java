@@ -1,0 +1,127 @@
+ Chapter 13_컬렉션 프레임워크
+ 
+ >> 컬렉션 프레임워크
+ 	- 배열은 기본 타입 뿐만 아니라 클래스 타입의 배열도 만들 수 있기 때문에 객체 저장소로 사용될 수 있지만, 
+ 	- 선언 시 정한 크기를 변경할 수 없고, 항목을 저장/삭제/추가하는 메소드가 없기 때문에 불편
+ 	- 이를 보완하기 위해 자바는 객체들을 효율적으로 추가, 삭제, 검색할 수 있도록 하는 컬렉션 프레임워크	
+ 	- 사용 방법을 정의한 인터페이스, 실제 객체를 저장하는 다양한 컬렉션 클래스(구현 클래스) 제공
+ 	>> List 
+ 		>> ArrayList, Vector, LinkedList
+ 	>> Set 	
+ 		>> HashSet, TreeSet
+ 	>> Map
+ 		>> HashMap, Hashtable, TreeMap, Properties	
+ 
+ >> List
+ 	- 배열과 비슷하게 객체를 인덱스로 관리
+ 	- 객체 중복 저장 가능, 이 경우 동일한 번지가 참조됨
+ 	- null 저장 가능, 이 경우 인덱스는 객체를 참조하지 않음
+ 	- 전체 객체 출력
+ 		>> 향상된 for문 사용하기
+ 			for(String str : list){
+ 				sysout(str)
+ 			}
+ 		>> for문과 인덱스 이용하기 
+ 	>> 메소드	
+ 		- 객체 추가
+ 			>> add(E e) 추가 / add(index, E e) 자리를 지정해서 추가 / set(index, E e) 지정된 자리에 객체 대체
+ 		- 객체 검색
+ 			>> contains(Object obj) 저장되어 있는 지 조사 / get(index) 지정된 자리의 객체 리턴 / isEmpty() 비어있는 지 조사 / size() 저장된 객체 수 리턴
+ 		- 객체 삭제	
+ 			>> clear() 저장된 모든 객체 삭제 / remove(index) 지정된 자리의 객체 삭제 / remove(Object o) 객체 삭제
+ 	>> ArrayList: List 인터페이스의 대표적인 구현 클래스
+ 		- 객체 생성 방법: List<E> 이름 = new ArrayList<>();
+ 		- ArrayList를 생성하면 내부에 10개으 객체를 저장할 수 있는 초기 용량을 가지게 됨
+ 	>> LinkedList: ArrayList와 사용 방법은 똑같지만, 내부 구조는 다르다. ArrayLst는 내부 배열에 객체를 저장해서 관리하지만, LinkedList는 인접 참조를 링크하여 체인처럼 관리
+ 		- 객체 생성 방법: List<E> 이름 = new LinkedList<>();
+ 		- 끝에서부터 순차적으로 추가, 삭제하는 경우는 ArrayList가 바르지만, 중간에 추가, 삭제하는 경우는 앞뒤 링크 정보만 변경하므로 LinkedList가 빠르다
+ 	>> Vector
+ 
+ >> Set
+ 	- List와 달리 저장 순서를 유지하지 않음
+ 	- 객체 중복 저장 불가능, 하나의 null만 저장 가능
+ 	>> 메소드(get 대신 iterator)
+ 		- 객체 추가 
+ 			>> boolean add(E e) 추가
+ 		- 객체 검색
+ 			>> boolean contains(Object o) 저장되어 있는 지 조사 / boolean isEmpty() 비어있는 지 조사 / Iterator<E> iterator() 저장되어 있는 객체를 한 번씩 가져오는 반복자를 리턴 / int size()
+ 		- 객체 삭제
+ 			>> void clear() 저장된 모든 객체 삭제 / boolean remove(Object o) 주어진 객체 삭제			
+ 	- 전체 객체 출력
+ 		>> 향상된 for문 활용하기
+ 		for(String str : list){
+ 				sysout(str)
+ 			}
+ 		>> iterator 반복자 사용하기
+ 			- Set <String> set = ... / Iterator<String> iterator = set.iterator();
+ 			 while(iterator.hasNext()){
+ 			 	String str = iterator.next();
+ 			 }
+ 			- iterator 반복자: Iterator 인터페이스를 구현한 객체
+ 			>> Iterator 인터페이스의 메소드들
+ 				- boolean hasNext(): 가져올 객체가 있으면 true, 없으면 false 리턴
+ 				- E next() 컬렉션에서 하나의 객체를 가져옴
+ 				- void remove() Set 컬렉션에서 객체를 제거 
+ 			- iterator의 next() 메소드와 remove() 메소드를 이용하여 객체 제거 가능
+ 			  while(iterator.hasNext()){
+ 			 	String str = iterator.next();
+ 			 	if(str.equals("홍길동"){
+ 			 	iterator.remove()
+ 			 	}
+ 			 }
+ 	>> HashSet 
+ 		- Set<E> set = new HashSet<>();
+ 		- 객체를 저장하기 전에 먼저 객체의 hashCode() 메소드를 호출해서 해시코드를 얻어내고, 이미 저장되어 있는 객체들의 해시코드와 비교.
+ 		- 만약 동일한 해시코드가 있다면 equals() 메소드로 두 객체를 비교해서 true가 나오면 동일한 객체로 판단하고 중복 저장을 하지 않음
+ 		- 문자열을 HashSet에 저장할 경우, 문자열이 같으면 같은 객체로 간주됨. String 클래스가 알아서 override했기 때문
+ 		- 사용자 정의 클래스를 파라미터로 지정하고 이름과 나이가 동일하다면 동일한 객체로 간주하고 싶다면 equals 메소드와 hashCode 메소드 재정의해야 함 
+>> Map
+	- Key와 Value로 구성된 Map.Entry 객체를 저장
+	- Entry는 인터페이스 내부에 선언된 중첩 인터페이스
+	- 여기서 키와 값은 모두 객체
+	- 키는 중복 저장될 수 없지만, 값은 중복 저장될 수 있음. 그러나 기존에 저장된 키와 동일한 키로 값을 저장하면 기존의 값은 없어지고 새로운 값으로 대체됨
+	>> 메소드
+ 		>> 객체 추가
+ 			- V put(K key, V value) 주어진 키로 값을 저장, 새로운 키일 경우 null을 리턴, 동일한 키가 있을 경우 값을 대체하고 이전 값을 리턴
+ 		>> 객체 검색	
+ 			- boolean containsKey(Object key) 주어진 키가 있는 지 여부 확인
+ 			- boolean containsValue(Object value) 주어진 값이 있는 지 여부 확인
+			- Set<Map.Entry<K, V>> entrySet() 키와 값의 쌍으로 구성된 모든 Map.Entry 객체를 Set에 담아서 리턴
+			- V get(Object key) 주어진 키가 있는 값을 리턴
+			- boolean isEmpty
+			- Set<K> keySet() 모든 키를 Set 객체에 담아서 리턴
+			- int size
+			- Collection<V> values()
+		>> 객체 삭제
+			- void clear()
+			- V remove(Object key)
+	- 전체 객체 출력
+		>> (1) keySet() 메소드로 모든 키를 Set 컬렉션으로 얻은 다음, 반복자를 통해 키를 하나씩 얻고 get() 메소드를 통해 값을 얻기
+		>> (2) entrySet() 메소드로 모든 Map.Entry를 Set 컬렉션으로 얻은 다음, 반복자를 통해 Map.Entry를 하나씩 얻고 getKey()와 getValue() 메소드를 이용해 키와 값 얻기		
+  >> HashMap
+	- Map 인터페이스를 구현한 대표적인 Map 컬렉션. 
+	- Key 타입으로 주로 스트링을 많이 사용, 문자열이 같을 경우 동등 객체가 될 수 있도록 hashCode 와 equals가 재정의도이ㅓ있기 때문
+	- Map<K, V> map = new HashMap<K, V>();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 				
