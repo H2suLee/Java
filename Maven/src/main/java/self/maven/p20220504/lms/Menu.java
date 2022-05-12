@@ -1,4 +1,5 @@
-package co.micol.miniprj.prac.lms;
+
+package self.maven.p20220504.lms;
 
 import java.sql.Date;
 import java.util.Scanner;
