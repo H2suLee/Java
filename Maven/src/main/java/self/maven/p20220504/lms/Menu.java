@@ -1,10 +1,9 @@
-package self.maven.p20220504.lms;
+package co.micol.miniprj.prac.lms;
 
 import java.sql.Date;
 import java.util.Scanner;
 
 public class Menu {
-
 	Scanner sc = new Scanner(System.in);
 	// 멤버 변수(필드)
 	private StudentService dao = new StudentService();
@@ -103,6 +102,7 @@ public class Menu {
 
 	private void lmsMenu() {
 		boolean b = false;
+		dao.dataSet(); // 초기화
 		do {
 			lmsTitle();
 			System.out.println("원하는 작업을 선택하세요.");
@@ -114,8 +114,8 @@ public class Menu {
 				break;
 			case 2: // 학생 조회
 				System.out.println("검색할 학생의 id를 입력하세요.");
-				String search = sc.next();
-				dao.selectStudent(search);
+				String searchID = sc.next();
+				dao.selectStudent(searchID);
 				break;
 			case 3: // 학생 등록
 				sc.nextLine(); // 이거 안 해주면 학생의 아이디를 입력하세요랑 학생의 이름을 입력하세요 같이 나옴
@@ -136,8 +136,15 @@ public class Menu {
 				dao.insertStudent(vo);
 				break;
 			case 4: // 학생 수정
+				System.out.println("수정할 학생의 id를 입력하세요.");
+				String inputID = sc.next();
+				dao.selectStudent(inputID);
+				dao.updateStudent(inputID);
 				break;
 			case 5: // 학생 삭제
+				System.out.println("삭제할 학생의 id를 입력하세요.");
+				String deleteID = sc.next();
+				dao.deleteStudent(deleteID);
 				break;
 			case 6: // 돌아가기
 				b = true;
@@ -152,3 +159,4 @@ public class Menu {
 		mainMenu();
 	}
 }
+
