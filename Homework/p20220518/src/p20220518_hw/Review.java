@@ -28,12 +28,12 @@ public class Review {
 		double var6 = 301.3;
 		
 		System.out.printf("%d, int\n", var1);
-		System.out.printf("%c, char\n", var2);
-		System.out.printf("%s, String\n", var3);
-//		System.out.printf("%e, long\n", var4);
+		System.out.printf("%s, String\n", var2);
+		System.out.printf("%c, char\n", var3);
+		System.out.printf("%d, long\n", var4);
 		System.out.printf("%f, float\n", var5);
 		System.out.printf("%.1f, double\n", var6);
-		
+
 		// Q4
 		
 		System.out.println("=====================Q4");
@@ -68,7 +68,13 @@ public class Review {
 		// Q6 
 		System.out.println("=====================Q6");
 		int value = 485;
-		System.out.println("4 + 8 + 5 = 17로 결과는 " + (4+8+5) + "입니다.");
+				
+		int num3 = value/100; // 4
+		int num4 = value%400; // 85 
+		int num5 = num4/10; // 8
+		int num6 = value%480; // 5
+		
+		System.out.println(num3 + num5 + num6); // 17
 		
 	}
 }
