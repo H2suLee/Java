@@ -9,7 +9,8 @@ public class MyAdder implements AdderInterface{
 
 	@Override
 	public int add(int n) {
-		return n*5+5;
+		double result = n * 5.5;
+		return (int) result;
 	}
 
 }
